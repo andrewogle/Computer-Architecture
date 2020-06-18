@@ -2,6 +2,8 @@
 
 import sys
 
+sp = 1 # stack pointer
+
 HLT = 0b00000001
 LDI = 0b10000010
 PRN = 0b01000111
@@ -112,7 +114,7 @@ class CPU:
         while self.running :
             opperand_a = self.ram_read(self.pc +1)
             opperand_b = self.ram_read(self.pc +2)
-            IR = self.ram_read(self.pc)
+            IR = self.ram_read(self.pc) #instruction register 
             if IR in self.branch_table :
                 self.branch_table[IR](opperand_a, opperand_b)
             # else:
@@ -141,7 +143,8 @@ class CPU:
         self.pc += 2
 
     def op_mul(self, opperand_a, opperand_b):
-        self.reg[opperand_a] = self.reg[opperand_a] * self.reg[opperand_b]
+        # self.reg[opperand_a] = self.reg[opperand_a] * self.reg[opperand_b]
+        self.reg[opperand_a] *= self.reg[opperand_b]
         
         self.pc += 3
 
